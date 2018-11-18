@@ -62,7 +62,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\HttpRequestHelpers.cs" />
-    <Compile Include="Model\ToDoItem.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,6 +103,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\lib\WinAPIDemo.Models\WinAPIDemo.Models.csproj">
+      <Project>{7f974564-c912-4e9c-b134-196fa899f09d}</Project>
+      <Name>WinAPIDemo.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\lib\WinAPIDemo.WinAPISignatures\WinAPIDemo.WinAPISignatures.csproj">
       <Project>{CD2ED5A6-A15E-4C37-917A-0AC1C45A6F36}</Project>
       <Name>WinAPIDemo.WinAPISignatures</Name>

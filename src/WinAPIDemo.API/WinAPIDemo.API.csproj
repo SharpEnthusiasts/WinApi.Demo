@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\WinAPIDemo.Models\WinAPIDemo.Models.csproj" />
+  </ItemGroup>
+
 </Project>
