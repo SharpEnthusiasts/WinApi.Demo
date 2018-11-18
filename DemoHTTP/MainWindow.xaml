@@ -1,0 +1,17 @@
+﻿<Window x:Class="DemoHTTP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoHTTP"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="400">
+    <Grid>
+        <TextBlock Name="TextBlock" Margin="10,10,10,60" TextWrapping="Wrap" Text=""/>
+        <Button Name="Get_All" Content="Get All" Margin="10,314,310,10" Click="Get_All_Click"/>
+        <Button Name="Get_Id" Content="Get Id" Margin="87,314,235,10" Click="Get_Id_Click"/>
+        <Button Name="Post" Content="Post" Margin="162,314,160,10" Click="Post_Click"/>
+        <Button Name="Put_Id" Content="Put Id" Margin="237,314,85,10" Click="Put_Id_Click"/>
+        <Button Name="Delete_Id" Content="Delete Id" Margin="312,314,10,10" Click="Delete_Id_Click"/>
+    </Grid>
+</Window>
