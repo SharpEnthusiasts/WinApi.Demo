@@ -5,13 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DemoHTTP"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="400">
+        Title="Windows API HTTP Demo" Height="410" Width="410" ResizeMode="NoResize">
     <Grid>
-        <TextBlock Name="TextBlock" Margin="10,10,10,60" TextWrapping="Wrap" Text=""/>
-        <Button Name="Get_All" Content="Get All" Margin="10,314,310,10" Click="Get_All_Click"/>
-        <Button Name="Get_Id" Content="Get Id" Margin="87,314,235,10" Click="Get_Id_Click"/>
-        <Button Name="Post" Content="Post" Margin="162,314,160,10" Click="Post_Click"/>
-        <Button Name="Put_Id" Content="Put Id" Margin="237,314,85,10" Click="Put_Id_Click"/>
-        <Button Name="Delete_Id" Content="Delete Id" Margin="312,314,10,10" Click="Delete_Id_Click"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10,41,0,0" HorizontalAlignment="Left" Width="222" Height="268" VerticalAlignment="Top">
+            <TextBlock Name="TextBlock" TextWrapping="Wrap" Text=""/>
+        </ScrollViewer>
+        <Button Name="Get_All" Content="Get All (Sample)" Margin="10,314,0,10" Click="Get_All_Click" HorizontalAlignment="Left" Width="222"/>
+        <Button Name="Execute" Content="Execute" Margin="237,314,10,10" Click="Execute_Click"/>
+        <Label Content="Server Name" Margin="237,10,0,0" HorizontalAlignment="Left" Width="147" Height="28" VerticalAlignment="Top"/>
+        <TextBox Name="ServerName" Margin="237,41,0,0" TextWrapping="Wrap" Text="localhost" HorizontalAlignment="Left" Width="145" Height="23" VerticalAlignment="Top"/>
+        <Label Content="Server Port" Margin="237,69,0,0" HorizontalAlignment="Left" Width="145" Height="26" VerticalAlignment="Top"/>
+        <TextBox Name="ServerPort" TextWrapping="Wrap" Text="5001" Margin="237,100,0,0" HorizontalAlignment="Left" Width="145" Height="23" VerticalAlignment="Top"/>
+        <Label Content="Server Endpoint" Margin="237,128,0,0" HorizontalAlignment="Left" Width="145" Height="26" VerticalAlignment="Top"/>
+        <TextBox Name="ServerEndpoint" TextWrapping="Wrap" Text="/api/todo" Margin="237,159,0,0" HorizontalAlignment="Left" Width="145" Height="23" VerticalAlignment="Top"/>
+        <Label Content="Request Method" Margin="237,187,0,0" HorizontalAlignment="Left" Width="145" Height="26" VerticalAlignment="Top"/>
+        <ComboBox Name="RequestMethod" Margin="237,218,0,0" SelectedIndex="0" HorizontalAlignment="Left" Width="145" Height="22" VerticalAlignment="Top">
+            <ComboBoxItem Content="GET"/>
+            <ComboBoxItem Content="POST"/>
+            <ComboBoxItem Content="PUT"/>
+            <ComboBoxItem Content="DELETE"/>
+        </ComboBox>
+        <Label Content="Data" Margin="237,245,0,0" HorizontalAlignment="Left" Width="145" Height="26" VerticalAlignment="Top"/>
+        <TextBox Name="Data" Margin="237,276,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" Width="145" Height="23" VerticalAlignment="Top"/>
+        <Label Content="Response:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="222"/>
     </Grid>
 </Window>

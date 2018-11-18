@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace WinAPISignatures
 {
@@ -19,7 +20,7 @@ namespace WinAPISignatures
 
         [DllImport("wininet.dll", SetLastError = true)]
         public static extern IntPtr HttpOpenRequest(IntPtr hConnect, string lpszVerb, string lpszObjectName,
-            string lpszVersion, string lpszReferer, string[] lplpszAcceptTypes, int dwFlags, IntPtr dwContext);
+            string lpszVersion, string lpszReferer, string[] lplpszAcceptTypes, uint dwFlags, IntPtr dwContext);
 
         [DllImport("wininet.dll", EntryPoint = "HttpSendRequest", CharSet = CharSet.Auto, SetLastError = true)]
         public extern static bool HttpSendRequest(IntPtr hRequest, string lpszHeaders,
@@ -32,5 +33,10 @@ namespace WinAPISignatures
         [DllImport("wininet.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool InternetCloseHandle(IntPtr hInternet);
+
+        [DllImport("wininet.dll", EntryPoint = "HttpQueryInfo", SetLastError = true)]
+        public static extern bool HttpQueryInfo(IntPtr hInternet, int dwInfoLevel, StringBuilder buffer,
+            ref long lpdwBufferLength, ref long lpdwIndex);
+
     }
 }
