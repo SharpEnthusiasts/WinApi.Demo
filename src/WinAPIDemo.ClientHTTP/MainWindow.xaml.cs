@@ -1,14 +1,7 @@
-﻿using System.Windows;
-using System.Runtime.InteropServices;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using static WinAPISignatures.Wininet;
-using System.Web;
+﻿using DemoHTTP.Model;
 using Newtonsoft.Json;
-using System.Reflection;
-using static DemoHTTP.HttpRequestHelpers;
+using System.Windows;
+using static DemoHTTP.Helpers.HttpRequestHelpers;
 
 namespace DemoHTTP
 {
