@@ -1,9 +1,9 @@
-﻿using DemoHTTP.Model;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Windows;
-using static DemoHTTP.Helpers.HttpRequestHelpers;
+using WinAPIDemo.Models;
+using static WinAPIDemo.ClientHTTP.Helpers.HttpRequestHelpers;
 
-namespace DemoHTTP
+namespace WinAPIDemo.ClientHTTP
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -40,12 +40,13 @@ namespace DemoHTTP
             }
             var serverEndpoint = ServerEndpoint.Text;
             var requestMethod = RequestMethod.Text;
+            var headers = Headers.Text;
             var data = Data.Text;
             if(data.Equals("sample"))
             {
                 data = json;
             }
-            TextBlock.Text = HttpSendRequestHelper(serverName, serverPort, requestMethod, serverEndpoint, data);
+            TextBlock.Text = HttpSendRequestHelper(serverName, serverPort, requestMethod, serverEndpoint, headers, data);
         }     
     }
 }

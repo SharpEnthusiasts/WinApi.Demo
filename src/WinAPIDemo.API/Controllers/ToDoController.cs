@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using NPRDemo.API.Models;
+using WinAPIDemo.API.Models;
+using WinAPIDemo.Models;
 
-namespace NPRDemo.API.Controllers
+namespace WinAPIDemo.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
