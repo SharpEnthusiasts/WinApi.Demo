@@ -91,7 +91,7 @@ namespace WinAPIDemo.ClientHTTP.ViewModel
         public IReadOnlyList<string> RequestMethods
         {
             get { return model.RequestMethods; }
-        }      
+        }
 
         #endregion
 
@@ -113,19 +113,20 @@ namespace WinAPIDemo.ClientHTTP.ViewModel
                             };
                             var json = JsonConvert.SerializeObject(item);
 
-                            if(Data.Equals("Sample"))
+                            if (Data.Equals("Sample"))
                             {
                                 Data = json;
                             }
 
                             var port = short.Parse(ServerPort);
                             Output = HttpSendRequestHelper(ServerName, port,
-                                RequestMethod, ServerEndpoint, Headers, Data);
+                            RequestMethod, ServerEndpoint, Headers, Data);
                             OnPropertyChanged(nameof(Output));
+
                         },
                         (object parameter) =>
                         {
-                            if(short.TryParse(ServerPort, out var port) == false)
+                            if (short.TryParse(ServerPort, out var port) == false)
                             {
                                 Output = "INVALID PORT";
                                 OnPropertyChanged(nameof(Output));
@@ -157,7 +158,7 @@ namespace WinAPIDemo.ClientHTTP.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

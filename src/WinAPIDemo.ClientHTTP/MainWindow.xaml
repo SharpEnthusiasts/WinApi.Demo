@@ -10,12 +10,11 @@
     <Window.DataContext>
         <vm:ViewModel
             ServerName="localhost"
-            ServerPort="5001"
             ServerEndpoint="/api/todo"
-            Data=""
+            ServerPort="5001"
             Headers="Content-Type: application/json"
             RequestMethod="GET"
-            Output=""
+            Data=""
             />
     </Window.DataContext>
     <Grid>
@@ -23,7 +22,7 @@
             <TextBlock Name="TextBlock" TextWrapping="Wrap" Text="{Binding Output, Mode=OneWay}"/>
         </ScrollViewer>
         <Button Name="Get_All" Command="{Binding GetAllRequest}" Content="Get All (Sample)" Margin="10,363,0,10" HorizontalAlignment="Left" Width="283"/>
-        <Button Name="Execute" Command="{Binding ExecuteRequest}" CommandParameter="{Binding ElementName=ServerPort, Path=Text, Mode=OneWay}" Content="Execute" Margin="298,363,10,10"/>
+        <Button Name="Execute" Command="{Binding ExecuteRequest}" Content="Execute" Margin="298,363,10,10"/>
         <Label Content="Server Name" Margin="298,10,10,0" Height="28" VerticalAlignment="Top"/>
         <TextBox Name="ServerName" Margin="298,41,10,0" TextWrapping="Wrap" Text="{Binding ServerName}" Height="23" VerticalAlignment="Top"/>
         <Label Content="Server Port" Margin="298,69,10,0" Height="26" VerticalAlignment="Top"/>
