@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using static WinAPISignatures.Wininet;
 
-namespace DemoHTTP
+namespace DemoHTTP.Helpers
 {
     public static class HttpRequestHelpers
     {

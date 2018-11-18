@@ -3,14 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoAPI", "DemoAPI\DemoAPI.csproj", "{1BEC6903-9ED0-4D1B-8C38-35EECC99E416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinAPIDemo.API", "src\WinAPIDemo.API\WinAPIDemo.API.csproj", "{1BEC6903-9ED0-4D1B-8C38-35EECC99E416}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoHTTP", "DemoHTTP\DemoHTTP.csproj", "{76944E28-1820-4734-9CCA-525B79034B0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinAPIDemo.ClientHTTP", "src\WinAPIDemo.ClientHTTP\WinAPIDemo.ClientHTTP.csproj", "{76944E28-1820-4734-9CCA-525B79034B0E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CD2ED5A6-A15E-4C37-917A-0AC1C45A6F36} = {CD2ED5A6-A15E-4C37-917A-0AC1C45A6F36}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinAPISignatures", "WinAPISignatures\WinAPISignatures.csproj", "{CD2ED5A6-A15E-4C37-917A-0AC1C45A6F36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinAPIDemo.WinAPISignatures", "lib\WinAPIDemo.WinAPISignatures\WinAPIDemo.WinAPISignatures.csproj", "{CD2ED5A6-A15E-4C37-917A-0AC1C45A6F36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{A4B499B5-15EE-4D8E-8E6E-A6CA9DC525EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F6B87D38-63F8-40E6-BB9E-200576C3B6D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1BEC6903-9ED0-4D1B-8C38-35EECC99E416} = {F6B87D38-63F8-40E6-BB9E-200576C3B6D8}
+		{76944E28-1820-4734-9CCA-525B79034B0E} = {F6B87D38-63F8-40E6-BB9E-200576C3B6D8}
+		{CD2ED5A6-A15E-4C37-917A-0AC1C45A6F36} = {A4B499B5-15EE-4D8E-8E6E-A6CA9DC525EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45CF3178-1A09-4FC2-8DF1-DD0EE918A42C}

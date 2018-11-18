@@ -61,8 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="HttpRequestHelpers.cs" />
-    <Compile Include="ToDoItem.cs" />
+    <Compile Include="Helpers\HttpRequestHelpers.cs" />
+    <Compile Include="Model\ToDoItem.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,9 +104,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WinAPISignatures\WinAPISignatures.csproj">
+    <ProjectReference Include="..\..\lib\WinAPIDemo.WinAPISignatures\WinAPIDemo.WinAPISignatures.csproj">
       <Project>{CD2ED5A6-A15E-4C37-917A-0AC1C45A6F36}</Project>
-      <Name>WinAPISignatures</Name>
+      <Name>WinAPIDemo.WinAPISignatures</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
