@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace WinAPISignatures
+namespace WinAPIDemo.WinAPISignatures
 {
     public static class Wininet
     {

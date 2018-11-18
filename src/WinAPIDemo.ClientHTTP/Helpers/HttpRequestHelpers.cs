@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Text;
-using static WinAPISignatures.Wininet;
+using System.Runtime.InteropServices;
+using static WinAPIDemo.WinAPISignatures.Wininet;
 
-namespace DemoHTTP.Helpers
+namespace WinAPIDemo.ClientHTTP.Helpers
 {
     public static class HttpRequestHelpers
     {
-        public static string HttpSendRequestHelper(string serverName, short serverPort, string httpVerb, string endpoint, string data = "")
+        public static string HttpSendRequestHelper(string serverName, short serverPort, string httpVerb, string endpoint, string headers, string data = "")
         {
             StringBuilder response = new StringBuilder();
             //INTERNET_OPEN_TYPE_PRECONFIG = 0
@@ -45,7 +45,8 @@ namespace DemoHTTP.Helpers
             }
             response.Append("HttpOpenRequest succeeded.\n");
 
-            string lpszHeaders = "Content-Type: application/json";
+            //string lpszHeaders = "Content-Type: application/json";
+            string lpszHeaders = headers;
             byte[] dataBytes = Encoding.ASCII.GetBytes(data);
             var boolApi = HttpSendRequest(hRequest, lpszHeaders, 0, dataBytes, (uint)dataBytes.Length);
             if (boolApi == false)

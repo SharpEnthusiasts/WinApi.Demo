@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WinAPIDemo.Models;
 
-namespace NPRDemo.API.Models
+namespace WinAPIDemo.API.Models
 {
     public class ToDoInit
     {
