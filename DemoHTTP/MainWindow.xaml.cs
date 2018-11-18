@@ -7,6 +7,7 @@ using System.Text;
 using static WinAPISignatures.Wininet;
 using System.Web;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace DemoHTTP
 {
@@ -88,7 +89,8 @@ namespace DemoHTTP
             TextBlock.Text += "InternetConnect succeeded.\n";
 
             string[] lplpszAcceptedTypes = { "*/*", null };
-            IntPtr hRequest = HttpOpenRequest(hConnect, httpVerb, endpoint, null, null, lplpszAcceptedTypes, 0x00800000, (IntPtr)1);
+            IntPtr hRequest = HttpOpenRequest(hConnect, httpVerb, endpoint, null, null, 
+                lplpszAcceptedTypes, 0x00800000, (IntPtr)1);
             if (IntPtr.Zero == hRequest)
             {
                 TextBlock.Text += "HttpOpenRequest returned null.\n";
@@ -107,8 +109,7 @@ namespace DemoHTTP
                 return;
             }
             TextBlock.Text += "HttpSendRequest succeeded.\n";
-
-            //char[] lpBuffer = new char[1024];
+            
             byte[] lpBuffer = new byte[1024];
             uint dwBytesRead = 0;
             string strBuffer = "";
@@ -123,10 +124,18 @@ namespace DemoHTTP
 
             } while (isRead == false || dwBytesRead == 0);
 
+            var lBuffer = new StringBuilder();
+            long lBufferLen = 4;
+            long lHeaderIndex = 0;
+            //dwInfoLevel = 19 / For HTTP_STATUS_CODE
+            var res = HttpQueryInfo(hRequest, 19, lBuffer, ref lBufferLen, ref lHeaderIndex);
+
             InternetCloseHandle(hRequest);
             InternetCloseHandle(hConnect);
             InternetCloseHandle(hInternet);
 
+            lBuffer.AppendLine();
+            TextBlock.Text += "Status Code: " + lBuffer.ToString();
             TextBlock.Text += strBuffer;
         }
 
@@ -142,7 +151,8 @@ namespace DemoHTTP
             }
             TextBlock.Text += "InternetOpen succeeded.\n";
 
-            IntPtr hUrl = InternetOpenUrl(hInternet, url, "", -1, 0x00800000, dwContext);
+            string lpszHeaders = "Content-Type: application/json";
+            IntPtr hUrl = InternetOpenUrl(hInternet, url, lpszHeaders, 0, 0x00800000, dwContext);
             if (IntPtr.Zero == hUrl)
             {
                 TextBlock.Text += "InternetOpenUrl returned null.\n";
@@ -165,9 +175,17 @@ namespace DemoHTTP
 
             } while (isRead == false || dwBytesRead == 0);
 
+            var lBuffer = new StringBuilder();
+            long lBufferLen = 4;
+            long lHeaderIndex = 0;
+            //dwInfoLevel = 19 / For HTTP_STATUS_CODE
+            var res = HttpQueryInfo(hUrl, 19, lBuffer, ref lBufferLen, ref lHeaderIndex);
+
             InternetCloseHandle(hUrl);
             InternetCloseHandle(hInternet);
 
+            lBuffer.AppendLine();
+            TextBlock.Text += "Status Code: " + lBuffer.ToString();
             TextBlock.Text += strBuffer;
         }
     }

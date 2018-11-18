@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace WinAPISignatures
 {
@@ -32,5 +33,10 @@ namespace WinAPISignatures
         [DllImport("wininet.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool InternetCloseHandle(IntPtr hInternet);
+
+        [DllImport("wininet.dll", EntryPoint = "HttpQueryInfo", SetLastError = true)]
+        public static extern bool HttpQueryInfo(IntPtr hInternet, int dwInfoLevel, StringBuilder buffer,
+            ref long lpdwBufferLength, ref long lpdwIndex);
+
     }
 }
