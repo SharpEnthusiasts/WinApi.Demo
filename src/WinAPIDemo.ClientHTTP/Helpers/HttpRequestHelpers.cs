@@ -2,6 +2,7 @@
 using System.Text;
 using System.Runtime.InteropServices;
 using static WinAPIDemo.WinAPISignatures.Wininet;
+using System.Collections.Generic;
 
 namespace WinAPIDemo.ClientHTTP.Helpers
 {
