@@ -56,7 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Client.cs" />
     <Compile Include="Common\ConnectionHandler.cs" />
+    <Compile Include="Common\MessageHandler.cs" />
+    <Compile Include="Model\Server.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
