@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinAPIDemo.Models", "lib\Wi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinAPIDemo.ChatClient", "src\WinAPIDemo.ChatClient\WinAPIDemo.ChatClient.csproj", "{562102AE-1D7A-4AF1-B2C7-3D0555AB2884}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinAPIDemo.ChatServer", "src\WinAPIDemo.ChatServer\WinAPIDemo.ChatServer.csproj", "{18DE7059-51CB-45BA-9659-E4B01DD9391D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinAPIDemo.ChatServer", "src\WinAPIDemo.ChatServer\WinAPIDemo.ChatServer.csproj", "{18DE7059-51CB-45BA-9659-E4B01DD9391D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

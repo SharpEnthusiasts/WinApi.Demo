@@ -6,19 +6,27 @@
         xmlns:vm="clr-namespace:WinAPIDemo.ChatClient.ViewModel"
         xmlns:local="clr-namespace:WinAPIDemo.ChatClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="450">
+        Title="MainWindow" Height="450" Width="500">
     <Window.DataContext>
         <vm:ViewModel Nickname="Default"
                       Message=""
+                      IPAddress="127.0.0.1"
+                      Port="1044"
                       />
     </Window.DataContext>
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10,38" Grid.ColumnSpan="2">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10,38,0,38" HorizontalAlignment="Left" Width="363">
             <TextBlock Name="TextBlock" TextWrapping="Wrap" Text="{Binding ChatLog, Mode=OneWay}"/>
         </ScrollViewer>
-        <TextBox Name="TextBox" Text="{Binding Message}" Height="23" Margin="10,0,96,10" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
-        <Button Name="Send" Content="Send" Command="{Binding SendMessage}" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="81" Height="23" Click="Send_Click" Grid.Column="1"/>
+        <TextBox Name="TextBox" Text="{Binding Message}" Height="23" Margin="10,0,98,10" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+        <Button Name="Send" Content="Send" Command="{Binding SendMessage}" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="81" Height="23" Grid.Column="1"/>
         <Label Content="Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="23"/>
-        <TextBox Height="23" TextWrapping="Wrap" Text="{Binding Nickname}" VerticalAlignment="Top" Margin="81,10,10,0"/>
+        <TextBox Height="23" TextWrapping="Wrap" Text="{Binding Nickname}" VerticalAlignment="Top" Margin="81,10,0,0" HorizontalAlignment="Left" Width="292"/>
+        <Label Content="IP Address" Margin="378,10,10,0" VerticalAlignment="Top"/>
+        <Label Content="Port" Margin="378,69,10,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="378,41,10,0" TextWrapping="Wrap" Text="{Binding IPAddress}" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="378,100,10,0" TextWrapping="Wrap" Text="{Binding Port}" VerticalAlignment="Top"/>
+        <Button Content="Connect" Command="{Binding Connect}" Margin="378,128,10,0" VerticalAlignment="Top"/>
+        <Button Content="Disconnect" Command="{Binding Disconnect}" Margin="378,153,10,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
