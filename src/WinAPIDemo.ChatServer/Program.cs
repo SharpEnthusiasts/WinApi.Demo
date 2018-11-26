@@ -18,21 +18,9 @@ namespace WinAPIDemo.ChatServer
             ConnectionHandler connectionHandler = new ConnectionHandler();
             MessageHandler messageHandler = new MessageHandler(connectionHandler);
             connectionHandler.Connect(ipaddr, port);
-            Task.Run(() => connectionHandler.Listen());
+            await Task.Factory.StartNew(() => connectionHandler.Listen(), TaskCreationOptions.LongRunning);
+            //Task.Run(() => connectionHandler.Listen());
             await Task.Delay(-1);
-
-            //while (true)
-            //    await connectionHandler.Listen();
-
-            //iResult = shutdown(acceptedSocket, 1);
-            //if (iResult == SOCKET_ERROR)
-            //{
-            //    //ERROR
-            //    var err = WSAGetLastError();
-            //    Debugger.Break();
-            //    closesocket(_socket);
-            //    WSACleanup();
-            //}
         }
     }
 }

@@ -10,5 +10,6 @@ namespace WinAPIDemo.ChatClient.Model
     {
         public string IPAddress { get; set; }
         public string Port { get; set; }
+        public string Output { get; set; }
     }
 }

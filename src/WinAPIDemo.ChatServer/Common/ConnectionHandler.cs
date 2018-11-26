@@ -32,21 +32,11 @@ namespace WinAPIDemo.ChatServer.Common
             Socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
             if ((uint)Socket == INVALID_SOCKET)
             {
-                Console.WriteLine("INVALID_SOCKET");
+                Console.WriteLine($"Failed to create socket! Code: {WSAGetLastError()}");
                 WSACleanup();
                 return;
             }
-            Console.WriteLine("Socket initialized.");
-
-            //uint _socket = socket2(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-            //IntPtr _socket = WSASocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, IntPtr.Zero, 0x01, 0x01);
-            //if ((uint)_socket == INVALID_SOCKET)
-            //{
-            //    TextBlock.Text += "INVALID_SOCKET\n";
-            //    WSACleanup();
-            //    return;
-            //}
-            //TextBlock.Text += "Socket initialized.\n";
+            Console.WriteLine("Socket created!");
 
             sockaddr_in service = new sockaddr_in();
             service.sin_addr = new in_addr();
@@ -56,9 +46,9 @@ namespace WinAPIDemo.ChatServer.Common
 
             if (bind(Socket, ref service, Marshal.SizeOf(service)) == SOCKET_ERROR)
             {
-                Console.WriteLine("FAILED TO CONNECT!");
-                var err = WSAGetLastError();
+                Console.WriteLine($"Failed to bind socket! Code: {WSAGetLastError()}");
                 closesocket(Socket);
+                WSACleanup();
                 return;
             }   
         }
@@ -67,29 +57,21 @@ namespace WinAPIDemo.ChatServer.Common
         {
             if (listen(Socket, 1) == SOCKET_ERROR)
             {
-                Console.WriteLine("ERROR SZMATO!");
+                Console.WriteLine($"Socket listen error! Code: {WSAGetLastError()}");
+                return;
             }
 
+            Console.WriteLine("Beginning to listen!");
             while (true)
             {
                 IntPtr acceptedSocket = (IntPtr)SOCKET_ERROR;
-                Console.WriteLine("Waiting for a client to connect!");
-
                 while (acceptedSocket == (IntPtr)SOCKET_ERROR)
                 {
                     acceptedSocket = accept(Socket, IntPtr.Zero, 0);
                 }
                 ClientConnected(this, acceptedSocket);
+                Console.WriteLine("Client connected!");
             }
-
-            //IntPtr acceptedSocket = (IntPtr)SOCKET_ERROR;
-            //Console.WriteLine("Waiting for a client to connect!");
-
-            //while (acceptedSocket == (IntPtr)SOCKET_ERROR)
-            //{
-            //    acceptedSocket = accept(Socket, IntPtr.Zero, 0);
-            //}
-            //ClientConnected(this, acceptedSocket);
         }
     }
 }

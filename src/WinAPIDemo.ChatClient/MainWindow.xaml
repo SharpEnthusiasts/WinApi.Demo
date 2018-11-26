@@ -18,6 +18,9 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10,38,0,38" HorizontalAlignment="Left" Width="363">
             <TextBlock Name="TextBlock" TextWrapping="Wrap" Text="{Binding ChatLog, Mode=OneWay}"/>
         </ScrollViewer>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="378,178,10,38">
+            <TextBlock Name="Output" TextWrapping="Wrap" Text="{Binding Output, Mode=OneWay}"/>
+        </ScrollViewer>
         <TextBox Name="TextBox" Text="{Binding Message}" Height="23" Margin="10,0,98,10" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
         <Button Name="Send" Content="Send" Command="{Binding SendMessage}" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="81" Height="23" Grid.Column="1"/>
         <Label Content="Nickname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="23"/>

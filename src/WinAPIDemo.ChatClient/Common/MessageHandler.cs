@@ -18,34 +18,26 @@ namespace WinAPIDemo.ChatClient.Common
         }
 
         public event EventHandler<string> MessageRecieved;
+        public event EventHandler<string> OutputMessage;
 
         public async Task Handle()
         {
             while(true)
             {
-                string message = "";
-                byte[] buffer = new byte[512];
+                string message;
                 int iResult = 0;
                 do
                 {
+                    byte[] buffer = new byte[512];
                     iResult = recv(_client.Socket, buffer, buffer.Length, 0);
                     if (iResult > 0)
                     {
-                        //TextBlock.Text += $"Bytes recieved: {iResult}\n";
+                        OutputMessage(this, $"Bytes recieved: {iResult}");
                         message = Encoding.ASCII.GetString(buffer).TrimEnd('\0');
                         if (string.IsNullOrEmpty(message) == false)
                             MessageRecieved(this, message);
                     }
-                    //if (string.IsNullOrEmpty(message) == false)
-                    //    MessageRecieved(this, message);
-                    //else if (iResult == 0)
-                    //    TextBlock.Text += "Connection closed\n";
-                    //else
-                    //    TextBlock.Text += $"recv failed: {WSAGetLastError()}\n";
                 } while (iResult > 0);
-                //if (string.IsNullOrEmpty(message) == false)
-                //    MessageRecieved(this, message);
-                //TextBlock.Text += message + "\n";
             }     
         }
 
@@ -55,24 +47,12 @@ namespace WinAPIDemo.ChatClient.Common
             var iResult = send(_client.Socket, msg, msg.Length, 0);
             if (iResult == SOCKET_ERROR)
             {
-                //ERROR
-                //var err = WSAGetLastError();
-                //Debugger.Break();
-                //closesocket(_socket);
-                //WSACleanup();
+                OutputMessage(this, $"Error, Sending failed. Code: {WSAGetLastError()}");
+                shutdown(_client.Socket, 2);
+                closesocket(_client.Socket);
+                WSACleanup();
             }
-            //TextBlock.Text += $"Bytes sent: {iResult}\n";
-            var sent = iResult.ToString();
-
-            //iResult = shutdown(_client.Socket, 1);
-            if (iResult == SOCKET_ERROR)
-            {
-                ////ERROR
-                //var err = WSAGetLastError();
-                //Debugger.Break();
-                //closesocket(_socket);
-                //WSACleanup();
-            }
+            OutputMessage(this, $"Bytes sent: {iResult}");
         }
     }
 }

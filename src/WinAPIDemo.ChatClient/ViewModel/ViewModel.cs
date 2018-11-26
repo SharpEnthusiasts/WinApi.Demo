@@ -25,10 +25,21 @@ namespace WinAPIDemo.ChatClient.ViewModel
             server = new Server();
         }
 
+        #region Events
+
         private void MessageRecieved(object sender, string e)
         {
             ChatLog += $"{e}\n";
         }
+
+        private void OutputMessage(object sender, string e)
+        {
+            Output += $"{e}\n";
+        }
+
+        #endregion
+
+        #region ModelBinding
 
         public string ChatLog
         {
@@ -80,6 +91,20 @@ namespace WinAPIDemo.ChatClient.ViewModel
             }
         }
 
+        public string Output
+        {
+            get { return server.Output; }
+            set
+            {
+                server.Output = value;
+                OnPropertyChanged(nameof(Output));
+            }
+        }
+
+        #endregion
+
+        #region Commands
+
         private ICommand sendMessage;
         private ICommand connect;
         private ICommand disconnect;
@@ -95,8 +120,8 @@ namespace WinAPIDemo.ChatClient.ViewModel
                             string time = DateTime.Now.ToLocalTime().ToShortTimeString();
                             string message = $"{time} {Nickname}: {Message}";
                             messageHandler.Send(message).Wait();
-                            Message = string.Empty;
                             OnPropertyChanged(nameof(ChatLog));
+                            Message = string.Empty;
                             OnPropertyChanged(nameof(Message));
                         },
                         (object parameter) =>
@@ -123,10 +148,16 @@ namespace WinAPIDemo.ChatClient.ViewModel
                         (object parameter) =>
                         {
                             connectionHandler = new ConnectionHandler();
+                            connectionHandler.OutputMessage += OutputMessage;
                             client = new Client(connectionHandler.Connect(IPAddress, Port));
-                            messageHandler = new MessageHandler(client);
-                            messageHandler.MessageRecieved += MessageRecieved;
-                            Task.Run(() => messageHandler.Handle());
+                            if(client.Socket != IntPtr.Zero)
+                            {
+                                messageHandler = new MessageHandler(client);
+                                messageHandler.MessageRecieved += MessageRecieved;
+                                messageHandler.OutputMessage += OutputMessage;
+                                Task.Factory.StartNew(() => messageHandler.Handle(), TaskCreationOptions.LongRunning);
+                                //Task.Run(() => messageHandler.Handle());
+                            }
                         },
                         (object parameter) =>
                         {
@@ -142,6 +173,7 @@ namespace WinAPIDemo.ChatClient.ViewModel
                 return connect;
             }
         }
+
         public ICommand Disconnect
         {
             get
@@ -164,11 +196,17 @@ namespace WinAPIDemo.ChatClient.ViewModel
             }
         }
 
+        #endregion
+
+        #region PropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion
     }
 }

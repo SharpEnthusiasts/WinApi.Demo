@@ -12,6 +12,8 @@ namespace WinAPIDemo.ChatClient.Common
 {
     public class ConnectionHandler
     {
+        public event EventHandler<string> OutputMessage;
+
         public IntPtr Connect(string ipaddr, string port)
         {
             WSAData wsaData;
@@ -21,19 +23,19 @@ namespace WinAPIDemo.ChatClient.Common
             int result = WSAStartup(wVersionRequested, out wsaData);
             if (result != 0)
             {
-                //TextBlock.Text += "Initialization Error!\n";
-                //return;
+                OutputMessage(this, "Initialization Error!");
+                return IntPtr.Zero;
             }
-            //TextBlock.Text += "Initialization Succedeed!\n";
+            OutputMessage(this, "Initialization Succedeed!");
 
             IntPtr _socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
             if ((uint)_socket == INVALID_SOCKET)
             {
-                //TextBlock.Text += "INVALID_SOCKET\n";
-                //WSACleanup();
-                //return;
+                OutputMessage(this, $"Failed to create socket! Code: {WSAGetLastError()}");
+                WSACleanup();
+                return IntPtr.Zero;
             }
-            //TextBlock.Text += "Socket initialized.\n";
+            OutputMessage(this, "Socket created!");
 
             sockaddr_in service = new sockaddr_in();
             service.sin_addr = new in_addr();
@@ -44,21 +46,22 @@ namespace WinAPIDemo.ChatClient.Common
             var iResult = connect(_socket, ref service, Marshal.SizeOf(service));
 
             if (iResult == SOCKET_ERROR)
+            {
+                OutputMessage(this, "Connection failed!");
+                closesocket(_socket);
+                WSACleanup();
                 return IntPtr.Zero;
-
+            }
+            OutputMessage(this, "Connected!");
             return _socket;
         }
 
         public void Disconnect(Client client)
         {
-            var iResult = shutdown(client.Socket, 1);
-            if (iResult == SOCKET_ERROR)
-            {
-                //ERROR
-                var err = WSAGetLastError();
-            }
+            shutdown(client.Socket, 2);
             closesocket(client.Socket);
             WSACleanup();
+            OutputMessage(this, "Disconnected!");
         }
     }
 }
