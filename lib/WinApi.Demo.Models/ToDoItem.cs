@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WinApi.Demo.Models
+﻿namespace WinApi.Demo.Models
 {
     public class ToDoItem
     {

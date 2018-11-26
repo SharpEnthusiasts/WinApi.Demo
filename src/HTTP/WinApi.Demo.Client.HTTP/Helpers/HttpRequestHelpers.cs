@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
+using System.Text;
 using static WinApi.Demo.Signatures.Wininet;
 
 namespace WinApi.Demo.Client.HTTP.Helpers
