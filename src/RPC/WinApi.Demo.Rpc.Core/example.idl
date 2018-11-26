@@ -1,0 +1,8 @@
+[
+	uuid(1004a67a-2a48-4224-bf00-4dfa9e8e3ec7),
+	version(1.0)
+]
+interface Example
+{
+	void Output([in, string] const char* szOutput);
+}
