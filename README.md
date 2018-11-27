@@ -2,6 +2,8 @@
 Simple demo project showing off capabilities of Windows API in internet connection via HTTP requests, RPC and WebSockets.
 Feel free to download the source code and use as a guide in your projects.
 
+[Click here](https://github.com/Maissae/WinApi.Demo/archive/master.zip) to download source code!
+
 ## HTTP Requests
 Done in C# with `wininet` and PInvoke. Signatures are contained in `lib/WinApi.Demo.Signatures/Wininet.cs`. 
 Library is loaded during runtime of the application and based on the signatures, methods are called from it.
