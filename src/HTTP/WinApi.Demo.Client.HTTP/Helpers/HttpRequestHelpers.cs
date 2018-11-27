@@ -21,7 +21,7 @@ namespace WinApi.Demo.Client.HTTP.Helpers
             response.Append("InternetOpen succeeded.\n");
 
             IntPtr hConnect = InternetConnect(hInternet, serverName, serverPort, null, null,
-                INTERNET_SERVICE_HTTP, INTERNET_FLAG_SECURE, (IntPtr)1);
+                INTERNET_SERVICE_HTTP, INTERNET_FLAG_SECURE, IntPtr.Zero);
             if (IntPtr.Zero == hConnect)
             {
                 response.Append("InternetConnect returned null.\n");
@@ -32,7 +32,7 @@ namespace WinApi.Demo.Client.HTTP.Helpers
 
             string[] lplpszAcceptedTypes = { "*/*", null };
             IntPtr hRequest = HttpOpenRequest(hConnect, httpVerb, endpoint, null, null,
-                lplpszAcceptedTypes, INTERNET_FLAG_SECURE, (IntPtr)1);
+                lplpszAcceptedTypes, INTERNET_FLAG_SECURE, IntPtr.Zero);
             if (IntPtr.Zero == hRequest)
             {
                 response.Append("HttpOpenRequest returned null.\n");
@@ -85,7 +85,6 @@ namespace WinApi.Demo.Client.HTTP.Helpers
         {
             StringBuilder response = new StringBuilder();
             IntPtr hInternet = InternetOpen("DemoAPI", INTERNET_OPEN_TYPE_PRECONFIG, null, null, 0);
-            IntPtr dwContext = default;
             if (IntPtr.Zero == hInternet)
             {
                 response.Append("InternetOpen returned null.\n");
@@ -96,7 +95,7 @@ namespace WinApi.Demo.Client.HTTP.Helpers
 
             string lpszHeaders = "Content-Type: application/json\0";
             //The size of the additional headers, if -1 and lpszHeaders is not null, length is calculated.
-            IntPtr hUrl = InternetOpenUrl(hInternet, url, lpszHeaders, -1, INTERNET_FLAG_HYPERLINK, dwContext);
+            IntPtr hUrl = InternetOpenUrl(hInternet, url, lpszHeaders, -1, INTERNET_FLAG_HYPERLINK, IntPtr.Zero);
             if (IntPtr.Zero == hUrl)
             {
                 response.Append("InternetOpenUrl returned null.\n");
