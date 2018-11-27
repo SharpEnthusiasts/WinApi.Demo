@@ -15,7 +15,8 @@ namespace WinApi.Demo.Chat.Client.Common
             //RESULT OF MAKEWORD(2,2) MACRO -/ (512 + 2) -> 514
             //We indicate that we want to use WinSocket in version 2.2
             Int16 wVersionRequested = 0b0000_0010_0000_0010;
-            int result = WSAStartup(wVersionRequested, out wsaData);
+            int result = WSAStartup(wVersionRequested, //Version of WebSockets we want to use.
+                out wsaData); //Data structure we recieve from function.
             if (result != 0)
             {
                 OutputMessage(this, "Initialization Error!");
@@ -23,11 +24,13 @@ namespace WinApi.Demo.Chat.Client.Common
             }
             OutputMessage(this, "Initialization Succedeed!");
 
-            IntPtr _socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+            IntPtr _socket = socket(AF_INET, //Address family - AF_INET (IPv4).
+                SOCK_STREAM, //Type of winsocket, stream is used for TCP and AF_INET or AF_INET6.
+                IPPROTO_TCP); //Protocol type, used only if type of winsocket is RAW.
             if ((uint)_socket == INVALID_SOCKET)
             {
                 OutputMessage(this, $"Failed to create socket! Code: {WSAGetLastError()}");
-                WSACleanup();
+                WSACleanup(); //Terminates winsockets on all threads.
                 return IntPtr.Zero;
             }
             OutputMessage(this, "Socket created!");
@@ -38,13 +41,15 @@ namespace WinApi.Demo.Chat.Client.Common
             service.sin_addr.s_addr = (uint)IPAddress.Parse(ipaddr).Address;
             service.sin_port = ushort.Parse(port);
 
-            var iResult = connect(_socket, ref service, Marshal.SizeOf(service));
+            var iResult = connect(_socket,  //We choose socket we want to connect. 
+                ref service,  //Reference to the structure with IP Address and protocol.
+                Marshal.SizeOf(service)); //Size of this structure.
 
             if (iResult == SOCKET_ERROR)
             {
                 OutputMessage(this, "Connection failed!");
-                closesocket(_socket);
-                WSACleanup();
+                closesocket(_socket); //We close the socket and free it.
+                WSACleanup(); //Terminates winsockets on all threads.
                 return IntPtr.Zero;
             }
             OutputMessage(this, "Connected!");
@@ -53,9 +58,9 @@ namespace WinApi.Demo.Chat.Client.Common
 
         public void Disconnect(Model.Client client)
         {
-            shutdown(client.Socket, 2);
-            closesocket(client.Socket);
-            WSACleanup();
+            shutdown(client.Socket, 2); //We shutdown the socket, both ways send/recv.
+            closesocket(client.Socket); //We close the socket and free it.
+            WSACleanup(); //Terminates winsockets on all threads.
             OutputMessage(this, "Disconnected!");
         }
     }

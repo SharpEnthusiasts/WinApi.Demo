@@ -11,7 +11,7 @@ namespace WinApi.Demo.Signatures
         public const int INTERNET_FLAG_PASSIVE = 0x08000000;
         public const uint INTERNET_FLAG_RELOAD = 0x80000000;
         public const byte INTERNET_OPEN_TYPE_PRECONFIG = 0;
-        public const byte HTTP_STATUS_CODE = 19;
+w        public const byte HTTP_QUERY_STATUS_CODE = 19;
         public const short INTERNET_FLAG_HYPERLINK = 0x00000400;
         public const int INTERNET_FLAG_ASYNC = 0x10000000;
         public const byte INTERNET_SERVICE_HTTP = 3;
