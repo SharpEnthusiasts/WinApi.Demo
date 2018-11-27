@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WinApi.Demo.Chat.Client.Model;
 using WinApi.Demo.Chat.Client.Common;
+using WinApi.Demo.Chat.Client.Model;
 
 namespace WinApi.Demo.Chat.Client.ViewModel
 {
@@ -119,7 +115,7 @@ namespace WinApi.Demo.Chat.Client.ViewModel
                         {
                             string time = DateTime.Now.ToLocalTime().ToShortTimeString();
                             string message = $"{time} {Nickname}: {Message}";
-                            messageHandler.Send(message).Wait();
+                            messageHandler.Send(message);
                             OnPropertyChanged(nameof(ChatLog));
                             Message = string.Empty;
                             OnPropertyChanged(nameof(Message));
