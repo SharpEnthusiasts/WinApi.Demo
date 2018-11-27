@@ -6,6 +6,13 @@ namespace WinApi.Demo.Signatures
 {
     public static class Wininet
     {
+        public const int INTERNET_FLAG_SECURE = 0x00800000;
+        public const int INTERNET_FLAG_EXISTING_CONNECT = 0x20000000;
+        public const int INTERNET_FLAG_PASSIVE = 0x08000000;
+        public const uint INTERNET_FLAG_RELOAD = 0x80000000;
+        public const byte INTERNET_OPEN_TYPE_PRECONFIG = 0;
+        public const byte HTTP_STATUS_CODE = 19;
+
         [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern IntPtr InternetOpen(string lpszAgent, int dwAccessType, string lpszProxyName,
             string lpszProxyBypass, int dwFlags);
