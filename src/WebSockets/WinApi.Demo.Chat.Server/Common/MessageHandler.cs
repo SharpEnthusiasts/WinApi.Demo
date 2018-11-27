@@ -40,7 +40,10 @@ namespace WinApi.Demo.Chat.Server.Common
                     Console.WriteLine("Error! Could not get client from connection list!");
                     continue;
                 }
-                var iSendResult = send(connection, buff, buff.Length, 0);
+                var iSendResult = send(connection, //We pick a connection we want to send data to.
+                    buff, //Buffer, our data payload in bytes.
+                    buff.Length, //Length of our buffer.
+                    0); //Flags, either MSG_DONTROUTE or MSG_OOB.
                 if (iSendResult == SOCKET_ERROR)
                 {
                     Console.WriteLine($"Error, Sending failed. Code: {WSAGetLastError()}");
@@ -57,8 +60,8 @@ namespace WinApi.Demo.Chat.Server.Common
                 Console.WriteLine("Error! Could not remove client from connection list!");
                 return;
             }
-            shutdown(connection, 2);
-            closesocket(connection);
+            shutdown(connection, 2); //We shutdown the socket, both ways send/recv.
+            closesocket(connection); //We close the socket and free it.
             Console.WriteLine($"Clients connected: {connectedClients.Count}");
         }
 
@@ -70,7 +73,10 @@ namespace WinApi.Demo.Chat.Server.Common
                 do
                 {
                     byte[] buffer = new byte[512];
-                    iResult = recv(client, buffer, buffer.Length, 0);
+                    iResult = recv(client, //Socket connection we want to recieve data from.
+                        buffer, //Buffer we load data into.
+                        buffer.Length, //Length of the buffer.
+                        0); //Flag, MSG_PEEK, MSG_OOB or MSG_WAITALL.
                     if (iResult > 0)
                     {
                         Console.WriteLine($"Bytes recieved: {iResult}");
