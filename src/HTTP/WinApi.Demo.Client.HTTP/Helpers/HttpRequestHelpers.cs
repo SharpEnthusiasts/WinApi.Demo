@@ -11,7 +11,7 @@ namespace WinApi.Demo.Client.HTTP.Helpers
         {
             StringBuilder response = new StringBuilder();
             IntPtr hInternet = InternetOpen("DemoAPI", INTERNET_OPEN_TYPE_PRECONFIG,
-                null, null, INTERNET_FLAG_ASYNC);
+                null, null, 0);
             if (IntPtr.Zero == hInternet)
             {
                 response.Append("InternetOpen returned null.\n");
@@ -42,7 +42,7 @@ namespace WinApi.Demo.Client.HTTP.Helpers
             response.Append("HttpOpenRequest succeeded.\n");
 
             //string lpszHeaders = "Content-Type: application/json";
-            string lpszHeaders = headers;
+            string lpszHeaders = headers + '\0';
             byte[] dataBytes = Encoding.ASCII.GetBytes(data);
             //The size of the additional headers, if -1 and lpszHeaders is not null, length is calculated.
             var boolApi = HttpSendRequest(hRequest, lpszHeaders, -1, dataBytes, (uint)dataBytes.Length);
@@ -84,7 +84,7 @@ namespace WinApi.Demo.Client.HTTP.Helpers
         public static string HttpSendRequestHelper(string url)
         {
             StringBuilder response = new StringBuilder();
-            IntPtr hInternet = InternetOpen("DemoAPI", INTERNET_OPEN_TYPE_PRECONFIG, null, null, INTERNET_FLAG_ASYNC);
+            IntPtr hInternet = InternetOpen("DemoAPI", INTERNET_OPEN_TYPE_PRECONFIG, null, null, 0);
             IntPtr dwContext = default;
             if (IntPtr.Zero == hInternet)
             {
@@ -94,7 +94,7 @@ namespace WinApi.Demo.Client.HTTP.Helpers
             }
             response.Append("InternetOpen succeeded.\n");
 
-            string lpszHeaders = "Content-Type: application/json";
+            string lpszHeaders = "Content-Type: application/json\0";
             //The size of the additional headers, if -1 and lpszHeaders is not null, length is calculated.
             IntPtr hUrl = InternetOpenUrl(hInternet, url, lpszHeaders, -1, INTERNET_FLAG_HYPERLINK, dwContext);
             if (IntPtr.Zero == hUrl)
