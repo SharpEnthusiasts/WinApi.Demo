@@ -115,7 +115,7 @@ namespace WinApi.Demo.Chat.Client.ViewModel
                         {
                             string time = DateTime.Now.ToLocalTime().ToShortTimeString();
                             string message = $"{time} {Nickname}: {Message}";
-                            messageHandler.Send(message).Wait();
+                            messageHandler.Send(message);
                             OnPropertyChanged(nameof(ChatLog));
                             Message = string.Empty;
                             OnPropertyChanged(nameof(Message));
