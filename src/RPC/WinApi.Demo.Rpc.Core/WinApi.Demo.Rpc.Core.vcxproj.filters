@@ -25,11 +25,13 @@
     </Midl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="example.acf" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="example_h.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="example.acf">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

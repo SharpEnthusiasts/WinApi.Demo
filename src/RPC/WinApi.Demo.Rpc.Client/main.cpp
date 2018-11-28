@@ -52,7 +52,7 @@ int main()
 
 		RpcTryExcept
 		{
-			std::cout << "Calling server";
+			std::cout << "Calling server" << std::endl;
 
 		// Calls the RPC function. The hExample1Binding binding handle
 		// is used implicitly.

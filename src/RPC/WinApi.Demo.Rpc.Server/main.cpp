@@ -1,5 +1,4 @@
 #include <iostream>
-#include "example_h.h"
 #include "example_s.c"
 
 // Server function.
@@ -29,7 +28,7 @@ int main()
 	if (status)
 		exit(status);
 
-	// Registers the Example1 interface.
+	// Registers the Example interface.
 	status = RpcServerRegisterIf2(
 		Example_v1_0_s_ifspec, // Interface to register.
 		NULL, // Use the MIDL generated entry-point vector.
